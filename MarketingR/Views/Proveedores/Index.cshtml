@@ -1,0 +1,82 @@
+﻿@model IEnumerable<MarketingR.Models.Proveedor>
+
+@{
+    ViewBag.Title = "Index";
+}
+<link href="~/Content/AdminLTE.css" rel="stylesheet" />
+
+<div class="box box-primary" style="margin-top:20px;">
+    <div class="box-header">
+        <h4 class="box-title">Listado de proveedores</h4>
+        <div class="box-tools pull-right">
+                <button type="button" class="btn btn-success" name="btnIndex" id="btnIndex" onclick="Regresar()">
+                    <i class="fas fa-plus-square"></i> Crear Nuevo
+                </button>
+        </div>
+    </div>
+
+    <div class="box-body">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre_Contacto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Apellido_Contacto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Movil)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Direccion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre_Contacto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Apellido_Contacto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Movil)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Direccion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ProveedorID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ProveedorID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ProveedorID })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+<script>
+    function Regresar() {
+        document.getElementById("btnIndex")
+        location.href = "/Proveedores/Create";
+    }
+</script>
+
+
+               

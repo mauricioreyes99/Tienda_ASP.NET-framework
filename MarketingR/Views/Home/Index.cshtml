@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<html>
+<head>
+    <title>Ejemplo sencillo de AJAX</title>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script>
+function realizaProceso(valorCaja1, valorCaja2){
+        var parametros = {
+                "valorCaja1" : valorCaja1,
+                "valorCaja2" : valorCaja2
+        };
+        $.ajax({
+                data:  parametros, //datos que se envian a traves de ajax
+                url:   '@Url.Action("Operacion","Home")', //archivo que recibe la peticion
+                type:  'post', //método de envio
+                beforeSend: function () {
+                        $("#resultado").html("Procesando, espere por favor...");
+                },
+            success: function (response) {//una vez que el archivo recibe el request lo procesa y lo devuelve
+                if (response) {
+                    $("#resultado").html(response);
+                } else {
+                    alert("error")
+                }
+                       
+            },
+            error: function (xhr) { // if error occured
+                alert("A ocurrido un Error intentelo de nuevo");
+                $("#resultado").append(xhr.statusText + xhr.responseText);
+                $("#resultado").html("Error");
+            },
+    });
+}
+    </script>
+</head>
+
+<body>
+    <hr />
+    <div class="form-group">
+      <label class="" style="color:red">Introduce valor 1</label>
+        <input type="text" class="form-control" name="caja_texto" id="valor1" value="" placeholder="0" />
+        <label style="color:red">Introduce valor 2</label> 
+        <input type="text" class="form-control" name="caja_texto" id="valor2" value="" placeholder="0" />
+    </div>
+   
+    <div class="form-group">
+        <input type="button" class="btn btn-primary" href="javascript:;" onclick="realizaProceso($('#valor1').val(), $('#valor2').val());" value="Calcula" />
+    </div>
+    <div class="form-group">
+
+        <div class="jumbotron" id="resultado">
+
+        </div>
+    </div>
+    
+   
+</body>
+</html>
